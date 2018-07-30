@@ -49,6 +49,7 @@ router.post('/exec', (req, res) => {
       notSetupMessage()
       return
     }
+    console.log(index)
     // Check if brightness is not set or out of range. If so, set to full.
     if (!(brightness >= 0xE0 && brightness <= 0xFF)) brightness = 0xFF
     // Sets brightness of pixel at index
@@ -88,6 +89,7 @@ router.post('/exec', (req, res) => {
   clear()
   write()
   if (req.body.code) {
+    console.log(req.body.code)
     eval(req.body.code)
     res.json({'ran': true})
   } else {
