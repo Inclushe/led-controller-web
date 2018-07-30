@@ -75,7 +75,6 @@ router.post('/exec', (req, res) => {
   }
 
   setup(60)
-  clear()
   if (req.body.code) {
     console.log(req.body.code)
     eval(req.body.code)

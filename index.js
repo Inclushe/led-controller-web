@@ -13,6 +13,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use('/vs', express.static(path.join(__dirname, 'node_modules/monaco-editor/min/vs')))
 app.use('/', require('./routes/index'))
 
-var server = app.listen(process.env.PORT || 3000, () => {
+var server = app.listen(process.env.PORT, () => {
   console.log(`App served on localhost:${server.address().port}`)
 })
