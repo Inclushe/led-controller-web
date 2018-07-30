@@ -74,12 +74,14 @@ router.post('/exec', (req, res) => {
       notSetupMessage()
       return
     }
-    // Sets blue of pixel at index
-    ledBuffer[4 + (index * 4) + 1] = 0
-    // Sets green of pixel at index
-    ledBuffer[4 + (index * 4) + 2] = 0
-    // Sets red of pixel at index
-    ledBuffer[4 + (index * 4) + 3] = 0
+    for (var currentIndex = 0; currentIndex < numLED; currentIndex++) {
+      // Sets blue of pixel at current index
+      ledBuffer[4 + (currentIndex * 4) + 1] = 0
+      // Sets green of pixel at current index
+      ledBuffer[4 + (currentIndex * 4) + 2] = 0
+      // Sets red of pixel at current index
+      ledBuffer[4 + (currentIndex * 4) + 3] = 0
+    }
   }
 
   setup(60)
