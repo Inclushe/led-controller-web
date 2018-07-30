@@ -1,0 +1,32 @@
+body
+  margin: 0
+  padding: 0
+  font-family: sans-serif
+
+.led-container
+  height: 200px
+  width: 100%
+  background: #333
+  .led-strip
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+  .led-strip__pixel
+    flex-shrink: 0
+    height: 15px
+    width: 15px
+    border-radius: 100%
+    margin: 2px
+    background: #000
+    label
+      position: absolute
+      margin-top: 20px
+      color: #ccc
+      font-size: 13px
+      font-weight: bold
+
+.monaco-container
+  height: 500px
+  width: 100%
+  background: #333
