@@ -34,3 +34,31 @@ body {
   width: 100%;
   background: #333;
 }
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.button-container button {
+  margin: 16px;
+  padding: 32px;
+  background: #333;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+.button-container button#reset {
+  background: #ddd;
+}
+.button-container button#run {
+  background: #0ac229;
+}
+.button-container button#send {
+  background: #fdb417;
+}
+.button-container button[disabled="disabled"] {
+  background: #fff !important;
+  color: #fff !important;
+}

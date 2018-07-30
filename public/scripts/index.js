@@ -1,10 +1,12 @@
 require.config({ paths: { 'vs': '/vs' }});
 require(['vs/editor/editor.main'], function() {
     var editor = monaco.editor.create(document.querySelector('.monaco-container'), {
-        value: [
-            'function x() {',
-            '\tconsole.log("Hello world!");',
-            '}'
+        value: localStorage.getItem('code') || [
+            'clear()',
+            '// write your code here',
+            '',
+            '',
+            'write()'
         ].join('\n'),
         language: 'javascript',
         fontSize: 20,
@@ -36,6 +38,15 @@ require(['vs/editor/editor.main'], function() {
           console.log(json)
         })
     })
+
+    document.body.querySelector('button#reset').addEventListener('click', (e) => {
+      localStorage.removeItem('code')
+      location.reload()
+    })
+
+    window.setInterval(function () {
+      localStorage.setItem('code', editor.getValue())
+    },1000)
   });
 
 var pixels = document.querySelectorAll('.led-strip__pixel')
@@ -87,7 +98,14 @@ function clear () {
     pixels[i].style = `background: rgb(0, 0, 0)`
   }
 }
-  
-window.addEventListener("beforeunload", (e) => {
-  e.returnValue = ''
+
+var buffer = []
+document.addEventListener('keypress', (e) => {
+  buffer.push(String.fromCharCode(e.keyCode))
+  if (buffer.length > 6) {
+    buffer.shift()
+  }
+  if (buffer.join('') == 'SENDIT') {
+    document.querySelector('#send').removeAttribute('disabled')
+  }
 })
