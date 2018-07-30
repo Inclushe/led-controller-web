@@ -37,6 +37,9 @@ require(['vs/editor/editor.main'], function() {
         .then((json) => {
           console.log(json)
         })
+        .catch((e) => {
+          console.error(e)
+        })
     })
 
     document.body.querySelector('button#reset').addEventListener('click', (e) => {
