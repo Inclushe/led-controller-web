@@ -1,12 +1,18 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
   font-family: sans-serif;
 }
 .led-container {
   height: 200px;
   width: 100%;
   background: #333;
+}
+.led-container h1 {
+  margin: 0;
+  padding: 36px;
+  color: #fff;
 }
 .led-container .led-strip {
   height: 100%;
@@ -30,19 +36,24 @@ body {
   font-weight: bold;
 }
 .monaco-container {
-  height: 500px;
+  height: calc(100vh - 200px);
   width: 100%;
   background: #333;
 }
 .button-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
   justify-content: flex-end;
+  pointer-events: none;
 }
 .button-container button {
+  pointer-events: auto;
   margin: 16px;
   padding: 32px;
   background: #333;
-  border: 0;
+  border: 4px solid #fff;
   border-radius: 8px;
   color: #fff;
   font-family: inherit;
@@ -50,15 +61,25 @@ body {
   cursor: pointer;
 }
 .button-container button#reset {
-  background: #ddd;
+  background: #333;
+}
+.button-container button#reset:hover {
+  background: #666;
 }
 .button-container button#run {
   background: #0ac229;
 }
+.button-container button#run:hover {
+  background: #25f448;
+}
 .button-container button#send {
   background: #fdb417;
 }
+.button-container button#send:hover {
+  background: #fec751;
+}
 .button-container button[disabled="disabled"] {
-  background: #fff !important;
+  cursor: not-allowed;
+  background: #ddd !important;
   color: #fff !important;
 }

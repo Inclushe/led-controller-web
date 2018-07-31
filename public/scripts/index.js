@@ -19,12 +19,15 @@ require(['vs/editor/editor.main'], function() {
       }
     }
 
-    document.body.querySelector('button#run').addEventListener('click', () => {
+    document.body.querySelector('button#run').addEventListener('click', (e) => {
+      e.target.disabled = 'disabled'
       console.log(editor.getValue())
       eval(editor.getValue())
+      e.target.removeAttribute('disabled')
     })
 
     document.body.querySelector('button#send').addEventListener('click', (e) => {
+      e.target.disabled = 'disabled'
       window
         .fetch('/exec', {
           method: 'POST',
@@ -36,20 +39,23 @@ require(['vs/editor/editor.main'], function() {
         .then((res) => res.json())
         .then((json) => {
           console.log(json)
+          e.target.removeAttribute('disabled')
         })
         .catch((e) => {
           console.error(e)
+          e.target.removeAttribute('disabled')
         })
     })
 
+    var storeInterval = window.setInterval(function () {
+      localStorage.setItem('code', editor.getValue())
+    },1000)
+
     document.body.querySelector('button#reset').addEventListener('click', (e) => {
+      clearInterval(storeInterval)
       localStorage.removeItem('code')
       location.reload()
     })
-
-    window.setInterval(function () {
-      localStorage.setItem('code', editor.getValue())
-    },1000)
   });
 
 var pixels = document.querySelectorAll('.led-strip__pixel')
@@ -105,10 +111,10 @@ function clear () {
 var buffer = []
 document.addEventListener('keypress', (e) => {
   buffer.push(String.fromCharCode(e.keyCode))
-  if (buffer.length > 6) {
+  if (buffer.length > 7) {
     buffer.shift()
   }
-  if (buffer.join('') == 'SENDIT') {
+  if (buffer.join('') == 'LEDSEND') {
     document.querySelector('#send').removeAttribute('disabled')
   }
 })
